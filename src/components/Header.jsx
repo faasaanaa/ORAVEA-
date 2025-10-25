@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useCartState } from '../context/CartContext'
 import { useAuth } from '../services/useAuth'
 import { useEffect } from 'react'
+import { firstOrFallback } from '../utils/envLists'
 
 export default function Header() {
   const { items } = useCartState()
@@ -22,7 +23,9 @@ useEffect(() => {
 const handleLogin = async () => {
   try {
     const result = await loginWithGoogle()
-    if (result.user.email === import.meta.env.VITE_ADMIN_EMAIL) {
+    // prefer plural env var VITE_ADMIN_EMAILS, fallback to VITE_ADMIN_EMAIL
+    const adminEmails = firstOrFallback('VITE_ADMIN_EMAILS', 'VITE_ADMIN_EMAIL')
+    if (result?.user?.email && adminEmails.some(e => e.toLowerCase() === result.user.email.toLowerCase())) {
       nav('/admin')   // 🔥 Redirect admin
     }
   } catch (e) {

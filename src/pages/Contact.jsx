@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { firstOrFallback, listFromEnv } from '../utils/envLists'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -13,7 +14,8 @@ export default function Contact() {
 
   const sendWhatsApp = () => {
     if (!validate()) return
-    const phone = import.meta.env.VITE_WHATSAPP_NUMBER || ''
+    const numbers = firstOrFallback('VITE_WHATSAPP_NUMBERS', 'VITE_WHATSAPP_NUMBER')
+    const phone = numbers.length ? numbers[0] : ''
     const txtParts = [
       `name: ${form.name}`,
       form.email ? `email: ${form.email}` : null,
@@ -27,7 +29,12 @@ export default function Contact() {
 
   const sendGmail = () => {
     if (!validate()) return
-    const to = import.meta.env.VITE_CONTACT_EMAIL || ''
+    const toList = listFromEnv('VITE_CONTACT_EMAILS')
+    if (!toList.length) {
+      const single = import.meta.env.VITE_CONTACT_EMAIL || ''
+      if (single) toList.push(single)
+    }
+    const to = toList.join(',')
     const subject = encodeURIComponent(`Contact from ${form.name}`)
     const body = encodeURIComponent(`name: ${form.name}\n${form.email ? `email: ${form.email}\n` : ''}message: ${form.message}`)
     const mailto = to ? `mailto:${to}?subject=${subject}&body=${body}` : `mailto:?subject=${subject}&body=${body}`

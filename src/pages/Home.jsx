@@ -35,11 +35,11 @@ export default function Home() {
           </motion.div>
 
           <div className="mt-6 flex flex-wrap gap-3 items-center">
-            <div className="text-sm text-gray-400">Free shipping over ₹2499</div>
+            <div className="text-sm text-gray-400">Free shipping over RS 5999</div>
             <div className="h-0.5 w-6 bg-white/8 rounded" />
             <div className="text-sm text-gray-400">Sustainably sourced</div>
             <div className="h-0.5 w-6 bg-white/8 rounded" />
-            <div className="text-sm text-gray-400">30-day returns</div>
+            <div className="text-sm text-gray-400">Pure Organic Products</div>
           </div>
         </div>
 

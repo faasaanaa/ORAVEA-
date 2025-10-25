@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { auth, provider, signInWithPopup, fbSignOut } from './firebase'
 import { onAuthStateChanged } from 'firebase/auth'
+import { firstOrFallback } from '../utils/envLists'
 
 export function useAuth() {
   const [user, setUser] = useState(null)
@@ -28,7 +29,9 @@ export function useAuth() {
     await fbSignOut(auth)
   }
 
-  const isAdmin = user?.email === import.meta.env.VITE_ADMIN_EMAIL
+  // Support multiple admin emails via VITE_ADMIN_EMAILS (comma-separated) with fallback to VITE_ADMIN_EMAIL
+  const adminEmails = firstOrFallback('VITE_ADMIN_EMAILS', 'VITE_ADMIN_EMAIL')
+  const isAdmin = !!user?.email && adminEmails.some(e => e.toLowerCase() === user.email.toLowerCase())
 
   return { user, loading, loginWithGoogle, signOut, isAdmin }
 }

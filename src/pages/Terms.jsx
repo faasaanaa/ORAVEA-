@@ -90,7 +90,7 @@ export default function Terms() {
       </p>
       <ul className="list-disc ml-6 mb-4 text-gray-300">
         <li><strong>WhatsApp:</strong> [DEVELOPER:03296780590 / OWNER:03446177861]</li>
-        <li><strong>Email:</strong> [DEVELOPER:saaforge@gmail.com / OWNER:majeedazad@gmail.com]</li>      
+        <li><strong>Email:</strong> [DEVELOPER:saaforge@gmail.com / OWNER:majeedazadph@gmail.com]</li>      
       </ul>
 
       <h2 className="text-xl font-semibold mt-8 mb-2 text-white">13. Agreement</h2>
