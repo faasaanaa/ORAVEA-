@@ -76,7 +76,7 @@ export default function Orders() {
                         <div className="font-medium truncate">{it.name}</div>
                         <div className="text-xs text-gray-300">Qty: {it.qty}</div>
                       </div>
-                      <div className="text-sm">{it.currency ? `${it.currency} ${it.subtotal}` : formatCurrency(it.subtotal)}</div>
+                      <div className="text-sm">{formatCurrency(it.subtotal)}</div>
                     </div>
                   ))}
                 </div>

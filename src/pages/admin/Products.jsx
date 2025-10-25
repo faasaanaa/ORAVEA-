@@ -15,9 +15,14 @@ async function uploadToCloudinary(file) {
   fd.append('file', file)
   fd.append('upload_preset', UPLOAD_PRESET)
   const res = await fetch(url, { method: 'POST', body: fd })
-  const data = await res.json()
-  if (!res.ok) throw new Error(data.error?.message || 'Cloudinary upload failed')
-  return data.secure_url
+  const text = await res.text()
+  let data = null
+  try { data = JSON.parse(text) } catch (e) { /* not json */ }
+  if (!res.ok) {
+    console.error('Cloudinary upload failed', { status: res.status, body: text })
+    throw new Error(data?.error?.message || `Cloudinary upload failed (${res.status}) - ${text}`)
+  }
+  return data?.secure_url || null
 }
 
 export default function Products() {

@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Define a reusable function for admin check
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in [
+          "msaadsaad580@gmail.com",
+          "majeedazadph@gmail.com",
+          "saaforge@gmail.com"
+        ];
+    }
+
+    // 🔹 Products Collection
+    match /products/{docId} {
+      allow read: if true; // everyone can see products
+      allow write, update: if isAdmin(); // only admins can add/edit/delete
+    }
+
+    // 🔹 Orders Collection
+    match /orders/{docId} {
+      allow read: if isAdmin(); // only admins can view all orders
+      allow create: if true; // anyone can place an order
+      allow update: if isAdmin(); // only admins can update status or shipment
+    }
+
+    // 🔹 Reviews Collection
+    match /reviews/{reviewId} {
+      allow read: if true; // everyone can view reviews
+      allow create: if request.auth != null; // only logged-in users can post
+      allow update, delete: if isAdmin(); // only admins can edit/delete
+    }
+  }
+}

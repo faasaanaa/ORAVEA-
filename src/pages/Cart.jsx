@@ -24,7 +24,7 @@ export default function CartPage() {
                 <div className="text-sm text-gray-300">Qty: {item.qty}</div>
               </div>
               <div className="text-right">
-                <div>{item.currency} {item.price}</div>
+                <div>{formatCurrency(item.price)}</div>
                 <div className="mt-2 flex gap-2">
                   <button onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: item.id })} className="text-xs px-2 py-1 bg-red-600 rounded">Remove</button>
                   <button onClick={() => dispatch({ type: 'UPDATE_QTY', payload: { id: item.id, qty: item.qty + 1 } })} className="text-xs px-2 py-1 bg-black/30 rounded">+</button>

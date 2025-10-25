@@ -7,6 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "seed": "node ./scripts/seedFirestore.js",
+  "fetch:hero-images": "node ./scripts/fetchHeroImages.js",
     "test": "vitest"
   },
   "dependencies": {
@@ -19,6 +20,9 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
     "uuid": "^9.0.0"
+  },
+  "optionalDependencies": {
+    "country-region-data": "^1.7.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.0.0",

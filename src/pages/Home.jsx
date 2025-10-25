@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import ProductGrid from '../components/ProductGrid'
 import WhatsAppFloating from '../components/WhatsAppFloating'
 import AnimatedBackground from '../components/AnimatedBackground'
+import HeroCarousel from '../components/HeroCarousel'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../services/firebase'
 
@@ -19,36 +20,28 @@ export default function Home() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div className="space-y-4">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.45 }} className="inline-block">
-            <span className="hero-badge">Premium • Organic</span>
-          </motion.div>
+      <section className="space-y-6">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.45 }} className="inline-block">
+          <span className="hero-badge">Premium • Organic</span>
+        </motion.div>
 
-          <motion.h1 initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight hero-heading">Organic premium products for everyday wellness</motion.h1>
-
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="mt-4 text-gray-300 max-w-lg">Curated, sustainable and luxurious organic goods delivered to your door. Experience premium organic living through ethically-sourced, clinician-vetted items designed to elevate daily rituals.</motion.p>
-
-          <motion.div className="mt-6 flex items-center gap-4" whileHover={{ scale: 1.02 }}>
-            <Link to="/shop" className="btn-gold px-6 py-3 shadow-xl">Shop Now</Link>
-            <Link to="/contact" className="text-sm text-gray-300 nav-link">Contact Us</Link>
-          </motion.div>
-
-          <div className="mt-6 flex flex-wrap gap-3 items-center">
-            <div className="text-sm text-gray-400">Free shipping over RS 5999</div>
-            <div className="h-0.5 w-6 bg-white/8 rounded" />
-            <div className="text-sm text-gray-400">Sustainably sourced</div>
-            <div className="h-0.5 w-6 bg-white/8 rounded" />
-            <div className="text-sm text-gray-400">Pure Organic Products</div>
+        <HeroCarousel className="h-60 sm:h-72 md:h-96">
+          <div className="text-center px-3">
+            <div className="text-sm uppercase text-yellow-300 font-medium tracking-wider">Organic & Curated</div>
+            <motion.h2 initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mt-2 text-2xl sm:text-3xl md:text-4xl font-semibold text-white">Naturally premium essentials</motion.h2>
+            <div className="mt-2 text-sm text-white/85 hidden sm:block">Hand-picked organic favourites for daily wellness</div>
           </div>
+        </HeroCarousel>
+
+        <div className="px-2 text-center sm:text-left">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }} className="mt-2 text-gray-300 max-w-xl mx-auto sm:mx-0">Curated organic goods — sustainable, effective, and beautifully packaged. Explore the collection.</motion.p>
+
+          <motion.div className="mt-4 flex justify-center sm:justify-start gap-3" whileHover={{ scale: 1.02 }}>
+            <Link to="/shop" className="btn-gold px-5 py-2">Shop Now</Link>
+            <Link to="/contact" className="text-sm text-gray-300 nav-link">Contact</Link>
+          </motion.div>
+
         </div>
-
-        <AnimatedBackground className="h-72 md:h-96">
-          <div className="text-center z-10 px-4">
-            <div className="text-2xl font-semibold text-white">Featured</div>
-            <div className="text-sm text-gray-300 mt-2">Hand-picked organic favorites</div>
-          </div>
-        </AnimatedBackground>
       </section>
 
       <section className="mt-12">

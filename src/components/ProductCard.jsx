@@ -34,10 +34,9 @@ export default function ProductCard({ product }) {
   return (
     <motion.article whileHover={{ y: -8 }} className="bg-gradient-to-br from-black/30 to-black/20 border border-black/20 p-4 rounded-lg shadow-lg hover:shadow-gold-glow transition-shadow" role="group" aria-label={`Product ${product.name}`}>
       <Link to={`/product/${product.id}`} className="no-underline" aria-label={`View ${product.name}`}>
-        <div className="relative h-48 overflow-hidden rounded-md">
+          <div className="relative h-48 overflow-hidden rounded-md">
           <motion.img src={img} alt={product.name} className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105" initial={{ scale: 1.02, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.6 }} />
-          <div className="absolute top-3 left-3 bg-black/60 text-xs px-2 py-1 rounded">Premium</div>
-          <div className="absolute top-3 right-3 text-xs px-2 py-1 rounded bg-black/60">
+          <div className="absolute top-3 left-3 text-xs px-2 py-1 rounded bg-black/60 z-20 whitespace-normal">
             {stock === 0 ? <span className="text-red-400 font-bold">Sold Out</span>
             : stock <=5 ? <span className="text-yellow-300">Only {stock} left</span>
             : <span className="text-green-300">In stock</span>}
@@ -49,13 +48,13 @@ export default function ProductCard({ product }) {
         <h3 className="font-semibold text-lg leading-tight">{product.name}</h3>
         <div className="text-brand-gold mt-1 text-lg">{formatCurrency(product.price, product.currency)}</div>
         <p className="text-xs text-gray-300 mt-2 line-clamp-3">{product.shortDescription}</p>
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div className="flex items-center gap-2" aria-hidden>
             <div className="text-sm text-gray-400">★★★★★</div>
             <div className="text-xs text-gray-500">({avg})</div>
           </div>
-          <div>
-            <button className="btn-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold text-sm">View</button>
+          <div className="w-full sm:w-auto">
+            <Link to={`/product/${product.id}`} className="btn-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold text-sm no-underline w-full block text-center" aria-label={`View ${product.name}`}>View</Link>
           </div>
         </div>
       </div>
